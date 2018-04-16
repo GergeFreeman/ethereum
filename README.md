@@ -46,4 +46,5 @@ dd($addresses);
 Donate:
 
 BTC : 1BkEUyWCd1TKbYvzFqiuQbQLmxtGs9jYas
+
 ETH : 0xDc5699adFbF7932020D02fF6BddA03b28C4bD3EF
