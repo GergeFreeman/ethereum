@@ -12,29 +12,23 @@ class EthereumRPC
      */
     private $uri;
 
+    /**
+     *
+     * @var Client 
+     */
+    private $client;
+
     public function __construct($uri)
     {
         $this->uri = $uri;
+        $this->client = RpcClient::factory($this->uri, [
+                    'debug' => false,
+        ]);
     }
 
     public function getJson($method, $params)
     {
-        $client = new Client([
-            'base_uri' => $this->uri,
-        ]);
-
-        $data = $client->post(
-                '', [
-            'jsonrpc' => 2.0,
-            'method' => $method,
-            'params' => $params
-                ]
-        );
-
-        return \GuzzleHttp\json_decode(
-                $data->getBody()
-                        ->getContents()
-        );
+        return $this->client->send($this->client->request(0, $method, $params))->getRpcResult();
     }
 
 }

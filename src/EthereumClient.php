@@ -55,9 +55,9 @@ class EthereumClient implements EthereumInterface
     {
         $results = $this->rpc->getJson(
                 'eth_getBalance', [
-            $address,
-            $tag,
-                ]
+                $address,
+                $tag,
+            ]
         );
 
         return $results->result;
@@ -74,8 +74,8 @@ class EthereumClient implements EthereumInterface
     {
         $results = $this->rpc->getJson(
                 'personal_newAccount', [
-            $passphrase,
-                ]
+                $passphrase,
+            ]
         );
 
         return $results->result;
@@ -92,8 +92,8 @@ class EthereumClient implements EthereumInterface
     {
         $results = $this->rpc->getJson(
                 'personal_lockAccount', [
-            $address,
-                ]
+                $address,
+            ]
         );
 
         return $results->result;
@@ -112,10 +112,10 @@ class EthereumClient implements EthereumInterface
     {
         $results = $this->rpc->getJson(
                 'personal_unlockAccount', [
-            $address,
-            $passphrase,
-            $duration,
-                ]
+                $address,
+                $passphrase,
+                $duration,
+            ]
         );
 
         return $results->result;
@@ -146,8 +146,8 @@ class EthereumClient implements EthereumInterface
 
         $results = $this->rpc->getJson(
                 'eth_sendTransaction', [
-            $transactionData,
-                ]
+                $transactionData,
+            ]
         );
 
         return $results->result;

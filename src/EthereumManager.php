@@ -29,7 +29,7 @@ class EthereumManager
     }
 
     /**
-     * Load the custom Ethereum Client interface.
+     * Load the custom Client interface.
      *
      * @param EthereumInterface $ethereum
      * @return $this
@@ -43,8 +43,8 @@ class EthereumManager
     /**
      * Create new client instance with given credentials.
      *
-     * @param array $auth
-     * @param array $urls
+     * @param string $uri
+     * @param string $port
      * @return $this
      */
     public function with(array $uri = null, $port = null)
