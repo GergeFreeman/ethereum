@@ -1,6 +1,7 @@
 <?php
 
 namespace Santran\Ethereum;
+use Santran\Ethereum\EthereumRPC;
 
 class EthereumClient implements EthereumInterface
 {
@@ -15,10 +16,17 @@ class EthereumClient implements EthereumInterface
      */
     private $port;
 
+    /**
+     *
+     * @var object
+     */
+    private $rpc;
+
     public function __construct($uri, $port)
     {
         $this->port = $port;
         $this->uri = $uri . ':' . $this->port;
+        $this->rpc = new EthereumRPC($this->uri);
     }
 
     /**
@@ -28,7 +36,7 @@ class EthereumClient implements EthereumInterface
      */
     public function addresses()
     {
-        $results = $this->getJson(
+        $results = $this->rpc->getJson(
                 'eth_accounts', null
         );
 
@@ -45,12 +53,11 @@ class EthereumClient implements EthereumInterface
      */
     public function addressBalance($address, $tag = 'latest')
     {
-        $results = $this->getJson(
-            'eth_getBalance',
-            [
-                $address,
-                $tag,
-            ]
+        $results = $this->rpc->getJson(
+                'eth_getBalance', [
+            $address,
+            $tag,
+                ]
         );
 
         return $results->result;
@@ -65,11 +72,10 @@ class EthereumClient implements EthereumInterface
      */
     public function newAddress($passphrase)
     {
-        $results = $this->getJson(
-            'personal_newAccount',
-            [
-                $passphrase,
-            ]
+        $results = $this->rpc->getJson(
+                'personal_newAccount', [
+            $passphrase,
+                ]
         );
 
         return $results->result;
@@ -84,11 +90,10 @@ class EthereumClient implements EthereumInterface
      */
     public function lockAddress($address)
     {
-        $results = $this->getJson(
-            'personal_lockAccount',
-            [
-                $address,
-            ]
+        $results = $this->rpc->getJson(
+                'personal_lockAccount', [
+            $address,
+                ]
         );
 
         return $results->result;
@@ -105,13 +110,12 @@ class EthereumClient implements EthereumInterface
      */
     public function unlockAddress($address, $passphrase, $duration = 300)
     {
-        $results = $this->getJson(
-            'personal_unlockAccount',
-            [
-                $address,
-                $passphrase,
-                $duration,
-            ]
+        $results = $this->rpc->getJson(
+                'personal_unlockAccount', [
+            $address,
+            $passphrase,
+            $duration,
+                ]
         );
 
         return $results->result;
@@ -129,28 +133,21 @@ class EthereumClient implements EthereumInterface
      *
      * @return mixed
      */
-    public function send(
-        $to_address,
-        $value,
-        $from_address,
-        $gas = null,
-        $gasPrice = null,
-        $data = null
-    ) {
+    public function send($to_address, $value, $from_address, $gas = null, $gasPrice = null, $data = null)
+    {
         $transactionData = [
-            'to'       => $to_address,
-            'value'    => $value,
-            'from'     => $from_address,
-            'gas'      => $gas,
+            'to' => $to_address,
+            'value' => $value,
+            'from' => $from_address,
+            'gas' => $gas,
             'gasPrice' => $gasPrice,
-            'data'     => $data,
+            'data' => $data,
         ];
 
-        $results = $this->getJson(
-            'eth_sendTransaction',
-            [
-                $transactionData,
-            ]
+        $results = $this->rpc->getJson(
+                'eth_sendTransaction', [
+            $transactionData,
+                ]
         );
 
         return $results->result;

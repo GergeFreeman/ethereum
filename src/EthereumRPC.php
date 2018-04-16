@@ -2,12 +2,22 @@
 
 namespace Santran\Ethereum;
 
-use GuzzleHttp\Client;
+use Graze\GuzzleHttp\JsonRpc\Client as RpcClient;
 
 class EthereumRPC
 {
 
-    private function getJson($method, $params)
+    /**
+     * @var string
+     */
+    private $uri;
+
+    public function __construct($uri)
+    {
+        $this->uri = $uri;
+    }
+
+    public function getJson($method, $params)
     {
         $client = new Client([
             'base_uri' => $this->uri,

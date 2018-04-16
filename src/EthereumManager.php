@@ -6,16 +6,16 @@ class EthereumManager
 {
 
     /**
-     * @var Client
+     * @var EthereumClient
      */
-    public $client;
+    public $ethereum;
 
     /**
-     * LivecoinManager constructor.
+     * EthereumManager constructor.
      */
     public function __construct()
     {
-        
+        $this->with();
     }
 
     /**
@@ -29,14 +29,14 @@ class EthereumManager
     }
 
     /**
-     * Load the custom Client interface.
+     * Load the custom Ethereum Client interface.
      *
-     * @param ClientContract $client
+     * @param EthereumInterface $ethereum
      * @return $this
      */
-    public function withCustomClient(EthereumInterface $client)
+    public function withCustomClient(EthereumInterface $ethereum)
     {
-        $this->client = $client;
+        $this->ethereum = $ethereum;
         return $this;
     }
 
@@ -51,7 +51,7 @@ class EthereumManager
     {
         $uri = $uri ? : config('ethereum.uri');
         $port = $port ? : config('ethereum.port');
-        $this->client = new EthereumClient($uri, $port);
+        $this->ethereum = new EthereumClient($uri, $port);
         return $this;
     }
 
@@ -64,10 +64,10 @@ class EthereumManager
      */
     public function __call($method, $parameters)
     {
-        if (!method_exists($this->client, $method)) {
+        if (!method_exists($this->ethereum, $method)) {
             abort(500, "Method $method does not exist");
         }
-        return call_user_func_array([$this->client, $method], $parameters);
+        return call_user_func_array([$this->ethereum, $method], $parameters);
     }
 
 }
