@@ -2,6 +2,10 @@
 
 namespace Ethereum\Types;
 
+/**
+ * Class TransactionInfo
+ * @package Ethereum\Types
+ */
 class TransactionInfo
 {
     private $blockHash;
@@ -19,6 +23,10 @@ class TransactionInfo
     private $r;
     private $s;
 
+    /**
+     * TransactionInfo constructor.
+     * @param $response
+     */
     public function __construct($response)
     {
         $this->blockHash = new BlockHash($response['blockHash']);

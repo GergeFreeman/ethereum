@@ -2,6 +2,10 @@
 
 namespace Ethereum\Types;
 
+/**
+ * Class Block
+ * @package Ethereum\Types
+ */
 class Block
 {
     private $difficulty;
@@ -25,6 +29,10 @@ class Block
     private $transactions;
     private $uncles;
 
+    /**
+     * Block constructor.
+     * @param $response array
+     */
     public function __construct($response)
     {
         $this->difficulty = hexdec($response['difficulty']);

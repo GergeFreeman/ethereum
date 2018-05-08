@@ -9,11 +9,26 @@ use Ethereum\Methods\Shh;
 use Ethereum\Methods\Web3;
 use Graze\GuzzleHttp\JsonRpc\Client;
 
+/**
+ * Class EthereumClient
+ * @package Ethereum
+ */
 class EthereumClient
 {
+    /**
+     * @var Client
+     */
     private $client;
+
+    /**
+     * @var array
+     */
     private $methods = [];
 
+    /**
+     * EthereumClient constructor.
+     * @param $url
+     */
     public function __construct($url)
     {
         $this->client = Client::factory($url);
@@ -26,26 +41,41 @@ class EthereumClient
         ];
     }
 
+    /**
+     * @return Net
+     */
     public function net()
     {
         return $this->methods['net'];
     }
 
+    /**
+     * @return Web3
+     */
     public function web3()
     {
         return $this->methods['web3'];
     }
 
+    /**
+     * @return Shh
+     */
     public function shh()
     {
         return $this->methods['shh'];
     }
 
+    /**
+     * @return Eth
+     */
     public function eth()
     {
         return $this->methods['eth'];
     }
 
+    /**
+     * @return Personal
+     */
     public function personal()
     {
         return $this->methods['personal'];

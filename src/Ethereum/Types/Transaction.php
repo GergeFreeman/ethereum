@@ -2,20 +2,58 @@
 
 namespace Ethereum\Types;
 
+/**
+ * Class Transaction
+ * @package Ethereum\Types
+ */
 class Transaction
 {
-
+    /**
+     * @var Address
+     */
     private $from;
+
+    /**
+     * @var Address
+     */
     private $to;
+
+    /**
+     * @var null|string
+     */
     private $data;
+
+    /**
+     * @var int|null
+     */
     private $gas;
+
+    /**
+     * @var int|null
+     */
     private $gasPrice;
+
+    /**
+     * @var int|null
+     */
     private $value;
+
+    /**
+     * @var int|null
+     */
     private $nonce;
 
-    public function __construct(
-    $from, $to, $data = null, $gas = null, $gasPrice = null, $value = null, $nonce = null
-    )
+    /**
+     * Transaction constructor.
+     * @param string $from
+     * @param string $to
+     * @param string|null $data
+     * @param integer|null $gas
+     * @param integer|null $gasPrice
+     * @param integer|null $value
+     * @param integer|null $nonce
+     */
+    public function __construct($from, $to, $data = null, $gas = null, $gasPrice = null, $value = null, $nonce = null)
     {
         $this->from = new Address($from);
         $this->to = new Address($to);
@@ -26,6 +64,9 @@ class Transaction
         $this->nonce = $nonce;
     }
 
+    /**
+     * @return array
+     */
     public function toArray()
     {
         $transaction = [
