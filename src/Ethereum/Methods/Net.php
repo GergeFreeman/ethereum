@@ -2,8 +2,15 @@
 
 namespace Ethereum\Methods;
 
+/**
+ * Class Net
+ * @package Ethereum\Methods
+ */
 class Net extends AbstractMethods
 {
+    /**
+     * @return mixed
+     */
     public function version()
     {
         $response = $this->client->send(
@@ -13,6 +20,9 @@ class Net extends AbstractMethods
         return $response->getRpcResult();
     }
 
+    /**
+     * @return bool
+     */
     public function listening()
     {
         $response = $this->client->send(
@@ -22,6 +32,9 @@ class Net extends AbstractMethods
         return (bool)$response->getRpcResult();
     }
 
+    /**
+     * @return number
+     */
     public function peerCount()
     {
         $response = $this->client->send(

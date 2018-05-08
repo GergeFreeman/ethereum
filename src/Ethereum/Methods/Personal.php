@@ -6,6 +6,10 @@ use Ethereum\Types\Address;
 use Ethereum\Types\Transaction;
 use Ethereum\Types\TransactionHash;
 
+/**
+ * Class Personal
+ * @package Ethereum\Methods
+ */
 class Personal extends AbstractMethods
 {
     /**
@@ -27,6 +31,10 @@ class Personal extends AbstractMethods
         return $addresses;
     }
 
+    /**
+     * @param $password
+     * @return Address
+     */
     public function newAccount($password)
     {
         $response = $this->client->send(
@@ -36,6 +44,12 @@ class Personal extends AbstractMethods
         return new Address($response->getRpcResult());
     }
 
+    /**
+     * @param $address
+     * @param $password
+     * @param $duration
+     * @return bool
+     */
     public function unlockAccount($address, $password, $duration)
     {
         $response = $this->client->send(
@@ -45,6 +59,11 @@ class Personal extends AbstractMethods
         return empty($result) ? false : true;
     }
 
+    /**
+     * @param $transaction
+     * @param $password
+     * @return TransactionHash
+     */
     public function sendTransaction($transaction, $password)
     {
         $response = $this->client->send(
@@ -52,6 +71,5 @@ class Personal extends AbstractMethods
         );
 
         return new TransactionHash($response->getRpcResult());
-
     }
 }

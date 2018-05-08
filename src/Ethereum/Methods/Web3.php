@@ -2,8 +2,15 @@
 
 namespace Ethereum\Methods;
 
+/**
+ * Class Web3
+ * @package Ethereum\Methods
+ */
 class Web3 extends AbstractMethods
 {
+    /**
+     * @return mixed
+     */
     public function clientVersion()
     {
         $response = $this->client->send(
@@ -13,6 +20,10 @@ class Web3 extends AbstractMethods
         return $response->getRpcResult();
     }
 
+    /**
+     * @param $stringToConvert
+     * @return mixed
+     */
     public function sha3($stringToConvert)
     {
         $response = $this->client->send(
