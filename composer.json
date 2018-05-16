@@ -1,5 +1,5 @@
 {
-    "name": "georgefreeman/ethereum",
+    "name": "h0rseduck/ethereum",
     "description": "Ethereum client library in PHP",
     "require": {
         "php": ">=5.6.4",
@@ -11,7 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "George Freeman",
+            "name": "h0rseduck",
             "email": "y@govnokot.ru"
         }
     ]
