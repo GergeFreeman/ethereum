@@ -35,7 +35,7 @@ class Ether
      */
     public function toWei()
     {
-        return new Wei($this->amount * 1000000000000000000);
+        return new Wei(bcmul($this->amount, 1000000000000000000));
     }
 
     /**
